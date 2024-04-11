@@ -33,7 +33,7 @@
         <a href="#" class="nav-link">Contact</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Add Company</a>
+        <a href="{{route('addCompany')}}" class="nav-link">Add Company</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
       <form method="POST" action="{{ route('logout') }}">
@@ -123,7 +123,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
+            <a href="{{route('home')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Company
@@ -184,9 +184,10 @@
                   <tr>
                     <td>{{$company->name}}</td>
                     <td>{{$company->email}}</td>
-                    <td>{{$company->logo}}</td>
+                    <td><img src="{{ asset('Complogo/' . $company->logo) }}" alt="Company Logo" width="50" height="50"></td>
                     <td>{{$company->company_url}}</td>
-                    <td>X</td>
+                    <td><a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a></td>
                   </tr>
                   @endforeach
                   </tbody>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Middleware\EnsureLogin;
 
 Route::get('/',function(){
@@ -19,6 +20,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
+
+Route::get('/addCompany',[CompanyController::class, 'index'])->name('addCompany');
+Route::post('/CompanyStore',[CompanyController::class, 'store'])->name('CompanyStore');
 
 
 

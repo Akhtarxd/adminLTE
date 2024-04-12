@@ -44,39 +44,34 @@ class CompanyController extends Controller
             return view('company.editCompany')->with($data);
         }
 
-        public function update(Request $request, string $id)
-    {
-      
-        date_default_timezone_set('Asia/Kolkata');
-     
-        $company = companies::find($id);
+        public function update(Request $request, $id)
+        {
+            // $request->validate([
+            //     'CompName'=>'min:3|max:255',
+            //     'CompEmail'=>'email|unique:companies,email',
+            //     'CompUrl'=>'url|unique:companies,company_url',
+            //     'Complogo'=>'mimes:jpeg,jpg,png,gif,hvif'
+            // ]);
+            date_default_timezone_set('Asia/Kolkata');
+        
+            $company = companies::where('id',$id)->first();
+        
+            if(isset($request->Complogo)){
+                $imageName = time().'.'.$request->Complogo->extension();
+                $request->Complogo->move(public_path('Complogo'),$imageName);
+                $company->logo = $imageName;
 
-        if ($request->hasFile('CompLogo')) {
-            $Complogo = $request->file('CompLogo');
-            $logoPath = '';
-    
-            // Generate a unique name for the logo file
-            $logoName = time() . '.' . $Complogo->getClientOriginalExtension();
-    
-            // Move the uploaded file to the specified path
-            $Complogo->move($logoPath, $logoName);
-    
-            // Update the company logo path in the database
-            $company->logo = $logoPath . '/' . $logoName;
-        }
+            }
 
-        $company->logo = $Complogo;
-        $company->name = $request->CompName;
-        $company->email = $request->CompEmail;
-        $company->company_url = $request->CompUrl;
-       $save = $company->save(); 
-        if($save){
-            
-            return redirect('/home')->with('updateMessage', 'company updated successfully');
-        }else{
-    
+            $company->name = $request->CompName;
+            $company->email = $request->CompEmail;
+            $company->company_url = $request->CompUrl;
+
+            $company->save();
+
+            return redirect()->route('home')->withSuccess('Company Updated');
         }
-    }
+        
 
     public function destroy($id)
     {

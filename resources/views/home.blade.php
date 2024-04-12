@@ -169,9 +169,21 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              @if (session('updateMessage'))
+    <div class="alert alert-success">
+        {{ session('updateMessage') }}
+    </div>
+@endif
+
+@if (session('errorMessage'))
+    <div class="alert alert-danger">
+        {{ session('errorMessage') }}
+    </div>
+@endif
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Company name</th>
                     <th>Email</th>
                     <th>Logo</th>
@@ -182,6 +194,7 @@
                   <tbody>
                     @foreach($companies as $company)
                   <tr>
+                    <td>{{$company->id}}</td>
                     <td>{{$company->name}}</td>
                     <td>{{$company->email}}</td>
                     <td><img src="{{ asset('Complogo/' . $company->logo) }}" alt="Company Logo" width="50" height="50"></td>

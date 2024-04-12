@@ -24,6 +24,7 @@ Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/addCompany',[CompanyController::class, 'index'])->name('addCompany');
 Route::post('/CompanyStore',[CompanyController::class, 'store'])->name('CompanyStore');
 Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
 Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 
 

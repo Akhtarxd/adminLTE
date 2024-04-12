@@ -12,10 +12,11 @@
 <body>
    
     
-<form method="post" enctype="multipart/form-data" action="{{route('CompanyStore')}}">
+<form method="post" enctype="multipart/form-data" action="{{ route('company.update', ['id' => $company->id]) }}">
     <div class="container mt-5">
     <h2>Edit company</h2>
     @csrf
+    @method('PUT')
   <div class="mb-3">
     <label for="exampleCname" class="form-label">Company Name</label>
     <input type="text" class="form-control" name="CompName" id="exampleInputCname" aria-describedby="CnameHelp" value="{{$company->name}}">

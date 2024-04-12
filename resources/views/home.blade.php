@@ -186,7 +186,8 @@
                     <td>{{$company->email}}</td>
                     <td><img src="{{ asset('Complogo/' . $company->logo) }}" alt="Company Logo" width="50" height="50"></td>
                     <td>{{$company->company_url}}</td>
-                    <td><a href="#" class="btn btn-primary">Edit</a>
+                    <td><a href="{{ route('company.edit', ['id' => $company->id]) }}" class="btn btn-primary">Edit</a></td>
+
                     <a href="#" class="btn btn-danger">Delete</a></td>
                   </tr>
                   @endforeach

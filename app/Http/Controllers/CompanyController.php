@@ -36,5 +36,38 @@ class CompanyController extends Controller
     
             return back()->withSuccess('Product created !!!!');
         }
+
+        public function edit($id)
+        {
+            $company = companies::find($id); 
+            $data = compact('company');
+            return view('company.editCompany')->with($data);
+        }
+
+        public function update(Request $request, string $id)
+    {
+      
+        date_default_timezone_set('Asia/Kolkata');
+     
+        $company = companies::find($id);
+
+        $company->fname = $request->fname;
+        $company->lname =  $request->lname;
+        $company->email = $request->email;
+        $company->company_id = $request->cID;
+        $company->password = $request->password;
+        $company->phone = $request->phone;
+       $save = $company->save(); 
+        if($save){
+            
+            return redirect('/home')->with('updateMessage', 'company updated successfully');
+        }else{
+    
+        }
+      
+
+
+
+    }
     }
 

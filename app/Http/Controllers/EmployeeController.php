@@ -14,9 +14,13 @@ class employeeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('emp.empTable',['employee'=>Employee::latest()->paginate(10)]);
-    }
+{
+    
+    $employees = Employee::with('company')->latest()->paginate(10);
+
+    
+    return view('emp.empTable', ['employees' => $employees]);
+}
 
     /**
      * Show the form for creating a new resource.

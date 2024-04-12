@@ -10,4 +10,12 @@ class companies extends Model
     use HasFactory;
 
     protected $table = 'companies';
+
+ 
+
+public function employees()
+{
+    return $this->hasMany('App\Models\Employee', 'company_id');
+}
+
 }

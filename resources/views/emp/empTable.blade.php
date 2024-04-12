@@ -21,12 +21,12 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($employee as $employee)
+  @foreach($employees as $employee)
     <tr>
       <th scope="row">{{$loop->iteration}}</th>
       <td>{{$employee->first_name}}</td>
       <td>{{$employee->last_name}}</td>
-      <td>{{$employee->company_id}}</td>
+      <td>{{$employee->company->name}}</td>
       <td>{{$employee->email}}</td>
       <td>{{$employee->phone}}</td>
       <td><a href="emp/{{$employee->id}}/edit" class="btn btn-primary">Edit</a>

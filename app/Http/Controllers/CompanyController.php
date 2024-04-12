@@ -51,12 +51,24 @@ class CompanyController extends Controller
      
         $company = companies::find($id);
 
-        $company->fname = $request->fname;
-        $company->lname =  $request->lname;
-        $company->email = $request->email;
-        $company->company_id = $request->cID;
-        $company->password = $request->password;
-        $company->phone = $request->phone;
+        if ($request->hasFile('CompLogo')) {
+            $Complogo = $request->file('CompLogo');
+            $logoPath = '';
+    
+            // Generate a unique name for the logo file
+            $logoName = time() . '.' . $Complogo->getClientOriginalExtension();
+    
+            // Move the uploaded file to the specified path
+            $Complogo->move($logoPath, $logoName);
+    
+            // Update the company logo path in the database
+            $company->logo = $logoPath . '/' . $logoName;
+        }
+
+        $company->logo = $Complogo;
+        $company->name = $request->CompName;
+        $company->email = $request->CompEmail;
+        $company->company_url = $request->CompUrl;
        $save = $company->save(); 
         if($save){
             

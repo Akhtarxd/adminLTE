@@ -76,10 +76,14 @@ class CompanyController extends Controller
         }else{
     
         }
-      
+    }
 
+    public function destroy($id)
+    {
+        $item = companies::findOrFail($id);
+        $item->delete();
 
-
+        return redirect()->route('home')->with('success', 'Item deleted successfully');
     }
     }
 

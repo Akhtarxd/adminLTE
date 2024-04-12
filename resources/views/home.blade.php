@@ -186,9 +186,13 @@
                     <td>{{$company->email}}</td>
                     <td><img src="{{ asset('Complogo/' . $company->logo) }}" alt="Company Logo" width="50" height="50"></td>
                     <td>{{$company->company_url}}</td>
-                    <td><a href="{{ route('company.edit', ['id' => $company->id]) }}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ route('company.edit', ['id' => $company->id]) }}" class="btn btn-primary">Edit</a>
 
-                    <a href="#" class="btn btn-danger">Delete</a></td>
+                    <form action="{{ route('company.destroy', $company->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form></td>
                   </tr>
                   @endforeach
                   </tbody>
